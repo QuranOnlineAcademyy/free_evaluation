@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quran Online Academy - Free Evaluation</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', 'Cairo', sans-serif;
+      background: linear-gradient(135deg, #FFD700, #FFEF9F);
+      color: #333;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #009999;
+      color: white;
+    }
+    .lang-toggle {
+      background: white;
+      color: #009999;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .lang-toggle:hover { background: #FFD700; color: black; }
+
+    h1 { text-align: center; margin-top: 30px; }
+    .form-container {
+      background: white;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    input, select {
+      margin-bottom: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #009999;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover { background: #FFD700; color: black; }
+    .divider {
+      width: 100%;
+      height: 4px;
+      background-color: #009999;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Quran Online Academy</h2>
+    <button class="lang-toggle" onclick="toggleLang()">عربي</button>
+  </header>
+
+  <div class="form-container">
+    <h1 id="title">Register Now for Your Free Evaluation Session!</h1>
+    <form id="evaluationForm">
+      <input type="text" id="name" name="name" placeholder="Full Name" required>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+      <input type="text" id="whatsapp" name="whatsapp" placeholder="WhatsApp Number" required>
+
+      <select id="country" name="country" required>
+        <option value="">Select Country</option>
+        <option>United States</option><option>Canada</option><option>United Kingdom</option>
+        <option>France</option><option>Germany</option><option>Italy</option>
+        <option>Spain</option><option>Netherlands</option><option>Sweden</option>
+        <option>Norway</option><option>Denmark</option><option>Switzerland</option>
+        <option>Austria</option><option>Finland</option><option>Ireland</option>
+        <option>Belgium</option><option>Portugal</option><option>Poland</option>
+        <option>Hungary</option><option>Czech Republic</option><option>Greece</option>
+        <option>Romania</option><option>United Arab Emirates</option><option>Saudi Arabia</option>
+        <option>Egypt</option><option>Qatar</option><option>Kuwait</option><option>Oman</option>
+        <option>Bahrain</option><option>Jordan</option><option>Lebanon</option>
+        <option>Morocco</option><option>Tunisia</option><option>Algeria</option>
+        <option>Turkey</option><option>Malaysia</option><option>Nigeria</option>
+        <option>South Africa</option><option>Pakistan</option><option>India</option>
+        <option>Bangladesh</option><option>Indonesia</option>
+      </select>
+
+      <select id="study_choice" name="study_choice" required>
+        <option value="">Select Study Option</option>
+        <option>Memorizing the Holy Qur'an</option>
+        <option>Learning Qur'an Recitation</option>
+        <option>Learning Tajweed</option>
+        <option>Learning Arabic Language & Speaking</option>
+        <option>Hadith</option>
+        <option>Fiqh</option>
+        <option>Tawheed</option>
+        <option>Seerah of Prophet Muhammad ﷺ</option>
+      </select>
+
+      <button type="submit" id="submitBtn">Send</button>
+    </form>
+  </div>
+
+  <div class="divider"></div>
+
+  <script>
+    const whatsappNumber = "201113691873"; // رقم واتساب الأكاديمية
+    const form = document.getElementById("evaluationForm");
+
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const whatsapp = formData.get("whatsapp");
+      const study = formData.get("study_choice");
+      const country = formData.get("country");
+
+      // رسالة واتساب
+      const message = `👋 New Evaluation Request:%0AName: ${name}%0AEmail: ${email}%0AWhatsApp: ${whatsapp}%0ACountry: ${country}%0AStudy: ${study}`;
+      
+      // فتح واتساب
+      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, "_blank");
+
+      // إشعار بسيط
+      alert("✅ تم إرسال بياناتك بنجاح عبر الواتساب");
+
+      form.reset();
+    });
+
+    let isArabic = false;
+    function toggleLang() {
+      isArabic = !isArabic;
+      document.documentElement.lang = isArabic ? "ar" : "en";
+      document.querySelector(".lang-toggle").textContent = isArabic ? "English" : "عربي";
+      document.getElementById("title").textContent = isArabic
+        ? "سجّل الآن لجلسة التقييم المجانية!"
+        : "Register Now for Your Free Evaluation Session!";
+      document.getElementById("name").placeholder = isArabic ? "الاسم الكامل" : "Full Name";
+      document.getElementById("email").placeholder = isArabic ? "البريد الإلكتروني" : "Email";
+      document.getElementById("whatsapp").placeholder = isArabic ? "رقم الواتساب" : "WhatsApp Number";
+      document.getElementById("country").options[0].text = isArabic ? "اختر الدولة" : "Select Country";
+      document.getElementById("study_choice").options[0].text = isArabic ? "اختر مجال الدراسة" : "Select Study Option";
+      document.getElementById("submitBtn").textContent = isArabic ? "إرسال" : "Send";
+    }
+  </script>
+</body>
+</html>
+
